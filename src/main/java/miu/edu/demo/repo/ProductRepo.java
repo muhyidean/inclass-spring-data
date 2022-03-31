@@ -11,10 +11,12 @@ public interface ProductRepo extends CrudRepository<Product,Integer> {
 
     List<Product> findAll();
 
-    List<Product> findProductByPriceGreaterThan(float price);
+    List<Product> findByPriceGreaterThan(float price);
 
-    @Query(value = "SELECT * FROM PRODUCT WHERE name= :name", nativeQuery = true)
-    List<Product> findProductHaveReviewMoreThan(int n);
+    Product findById(int id);
+
+    @Query("select p from Product p where p.review.size >= :n")
+    List<Product> findHaveReviewMoreThan(int n);
 
 
 

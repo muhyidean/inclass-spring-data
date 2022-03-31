@@ -1,5 +1,6 @@
 package miu.edu.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "product_name")
+    @Column(name = "name")
     private String name;
     private float price;
 
     @OneToMany(mappedBy = "product")
+    @JsonManagedReference
     private List<Review> review;
 }

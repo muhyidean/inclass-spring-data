@@ -1,6 +1,7 @@
 package miu.edu.demo.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -18,10 +19,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String comment;
-    private int numberOfStates;
+    private int numberOfStars;
 
     @ManyToOne()
     @JoinColumn()
+    @JsonBackReference
     private Product product;
 
 

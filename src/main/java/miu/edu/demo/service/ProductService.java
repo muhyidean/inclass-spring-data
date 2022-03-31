@@ -10,7 +10,11 @@ public interface ProductService {
 
     List<ProductDto> findAll();
 
-    ProductDto getById(int id);
+    ProductDto findById(int id);
 
     void save(Product p);
+
+    List<Product> findHaveReviewMoreThan(int n);
+
+    List<Product> findByPriceGreaterThan(float price);
 }

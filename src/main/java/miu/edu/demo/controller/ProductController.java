@@ -27,17 +27,33 @@ public class ProductController {
         return productService.findAll();
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") int id){
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Custom-Header","someValue");
+//       return ResponseEntity.ok().headers(headers).body(productService.findById(id));
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") int id){
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Custom-Header","someValue");
-       return ResponseEntity.ok().headers(headers).body(productService.getById(id));
+    public ProductDto getProduct(@PathVariable("id") int id){
+        return productService.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void saveProduct( @RequestBody Product p ){
         productService.save(p);
+    }
+
+
+    @GetMapping("/filter/review/{val}")
+    public List<Product> findProductsReviewMoreThan(@PathVariable("val") int val){
+        return productService.findHaveReviewMoreThan(val);
+    }
+
+    @GetMapping("/filter/price/{val}")
+    public List<Product> findByPrice(@PathVariable("val") float val){
+        return productService.findByPriceGreaterThan(val);
     }
 
 
