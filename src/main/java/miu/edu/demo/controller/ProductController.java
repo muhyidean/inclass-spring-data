@@ -1,6 +1,7 @@
 package miu.edu.demo.controller;
 
 
+import miu.edu.demo.aspect.annotation.LogMe;
 import miu.edu.demo.domain.Product;
 import miu.edu.demo.domain.Review;
 import miu.edu.demo.domain.dto.ProductDto;
@@ -23,7 +24,8 @@ public class ProductController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<ProductDto> getProduct(){
+    public List<ProductDto> getProducts(){
+        System.out.println("*** GETALL ***");
         return productService.findAll();
     }
 
@@ -34,13 +36,16 @@ public class ProductController {
 //       return ResponseEntity.ok().headers(headers).body(productService.findById(id));
 //    }
 
+    @LogMe
     @GetMapping("/{id}")
-    public ProductDto getProduct(@PathVariable("id") int id){
+    public ProductDto getProduct(@PathVariable("id") int id)  {
+
         return productService.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @LogMe
     public void saveProduct( @RequestBody Product p ){
         productService.save(p);
     }
